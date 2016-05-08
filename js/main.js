@@ -30,7 +30,7 @@ $(document).on('ready', function(){
                 console.log('received data from flickr: '+data);
                 $.each( data.items, function( i, item ) {
                 // 4.   Update the display to add the images to the list with the id `#images`.
-                $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+                $( "<img>" ).attr( "src", item.media.m ).prependTo( "#images" );
                 if ( i === 10 ) {
                 return false;
             }
