@@ -27,16 +27,25 @@ $(document).on('ready', function(){
               tagmode: "any",
               format: "json"
               }) .done(function( data ) {
+                //$('#images').empty(); deletes the prior search
+                $('#images').empty();
                 console.log('received data from flickr: '+data);
-                $.each( data.items, function( i, item ) {
-                // 4.   Update the display to add the images to the list with the id `#images`.
-                $( "<img>" ).attr( "src", item.media.m ).prependTo( "#images" );
-                if ( i === 10 ) {
+                $.each(data.items, function(i, item) {
+				var newListItem = $("<li>").addClass("col-md-4");
+        		var newTitle = $('<p class="image-title">').html(item.title).appendTo(newListItem);
+        		var newDate = $('<p class="image-date">').text(item.date_taken).appendTo(newListItem);
+        		var newDescription = $('<p class="image-description">').html(item.description).appendTo(newListItem);
+        		var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').appendTo(newListItem);
+        		newListItem.appendTo("#images");
+        		if ( i ===  10 ) {
                 return false;
             }
           });
         }); 
     }
+    
+    
+    
                                
     // Attach an event to the search button (`button.search`) to execute the
     // search when clicked.
